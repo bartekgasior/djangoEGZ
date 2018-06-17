@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1> Lista ksiazek </h1>
+
+	{% if moja_ksiazka_list %}
+	<ul>
+	
+		{% for ksiazka in moja_ksiazka_list %}
+		<li>
+			<a href=" {{ ksiazka.get_absolute_url }}">{{ksiazka.tytul}} </a> {{ ksiazka.autor }} 
+		</li>
+		{% endfor %}
+		
+	</ul>
+	{% else %}
+		<p>Jeszcze nie ma ksiazek</p>
+	{% endif %}
+	
+	{% block pagination %}
+		{% if is_paginated %}
+		
+			<div class = "pagination">
+				<span class = "page-links">
+					{% if page_obj.has_previous %}
+						<a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Poprzednia</a>
+					{% endif %}
+					
+					<span class="page-current">
+						Strona {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span>
+					
+					{% if page_obj.has_next %}
+						<a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Nastepna</a>
+					{% endif %}
+				</span>
+			</div>
+		{% endif %}
+	{% endblock %}
+	
+{% endblock %}
+

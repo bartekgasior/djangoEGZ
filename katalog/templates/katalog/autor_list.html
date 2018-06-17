@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1> Lista autorow </h1>
+
+	{% if autor_list %}
+	<ul>
+	
+		{% for autor in autor_list %}
+		<li>
+			{{ autor.nazwisko }}
+		</li>
+		{% endfor %}
+		
+	</ul>
+	{% else %}
+		<p>Jeszcze nie ma autorow</p>
+	{% endif %}
+	
+{% endblock %}
